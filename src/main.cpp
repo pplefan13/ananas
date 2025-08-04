@@ -13,7 +13,7 @@
 AsyncWebServer server(80);
 int ncounter=0, nindex=0;
 int dcounter=0, dindex=0;
-char x[100][10]={0};
+char x[100][15]={0};
 char y[100][10]={0};
 
 void setup() {
@@ -121,11 +121,11 @@ void loop() {
   display.clearDisplay();
   for(int ind=0; ind<=nindex; ind++){
     for(int j=0; j<strlen(x[ind]); j++)
-        mdisplay(String(x[ind][j]), 1, 5*j, pos);
+        mdisplay(String(x[ind][j]), 1, 6*j, pos);
     delay(500);
 
     for(int j=0; j<strlen(y[ind]); j++)
-        mdisplay(String(y[ind][j]), 1, 5*j+64, pos);
+        mdisplay(String(y[ind][j]), 1, 5*j+80, pos);
     
     pos+=10;
 
