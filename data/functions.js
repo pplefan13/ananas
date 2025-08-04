@@ -1,4 +1,5 @@
 
+
 let names=localStorage.getItem('names.json');
 let dates=localStorage.getItem('dates.json');
 
@@ -6,6 +7,7 @@ let data={names:[], dates:[]};
   
 data.names=JSON.parse(names);
 data.dates=JSON.parse(dates);
+//data.exps=JSON.parse(exp);
 if(!data.names)
   data.names=[];
 if(!data.dates)
@@ -15,6 +17,7 @@ let x=return_array(data.names.array, "c1");
 let y=return_array(data.dates.array, "c2");
 
 let food={name: x, date: y};
+
 
 function gotofrigider(){
     window.location="frigider.html";}
@@ -94,11 +97,12 @@ function remove(obj){
 function add(obj){
   name_input=document.getElementById("fname").value;
   date_input=document.getElementById("fdate").value;
+  exp(date_input);
+
   let new_name=f('names.json', name_input, "c1");
-  let new_date=f('dates.json', exp(date_input), "c2");
+  let new_date=f('dates.json', date_input, "c2");
   obj.name=new_name;
   obj.date=new_date;
-  console.log(obj.date);
 
   document.getElementById("demo").innerHTML= '';
   document.getElementById("button").innerHTML='';
@@ -109,9 +113,7 @@ class alimente {
       this.name = name;
       this.date = date;
   }
-  exp(){
-    return exp(this.date);
-  }
+
 }
 
 function date(x){
@@ -128,7 +130,7 @@ function exp(x){
     let emo=Number(s[1]);
     let cmo=Number(d.getMonth())+1;
     let eday=Number(s[2]); 
-    let cday=Number(d.getDate());
+    let cday=Number(d.getDate())+1;
     let etotal=0; 
     let ctotal=0;
 
@@ -148,6 +150,7 @@ function exp(x){
     //adding the days left in the date
     etotal+=eday;
     ctotal+=cday;
+    //console.log(d.getDate());
 
     return etotal-ctotal;
   }
@@ -205,15 +208,20 @@ function f(filename, newContent, place) {
   if (!jsonData.array) {
     jsonData.array = [];}
    
-  if(newContent){
+  if(newContent!=null){
     jsonData.array.push(newContent);}
 
   let y=jsonData.array;
   let z=return_array(y, place);
   let x=JSON.stringify(z);
-  let a=make(x);  
+  let a=make(x);
+  let ca=a; 
   
-  safe_display(a, place, 100);
+  for(let i=0; i<a.length; i++)
+    if(place=='c2'&& newContent!='niciodata')
+      ca[i]=String(exp(ca[i]));
+
+  safe_display(ca, place, 100);
   
   localStorage.setItem(filename, JSON.stringify(jsonData, 2, null));
   return a;
@@ -302,8 +310,4 @@ function exportLocalStorage(filename, place) {
   a.download = place;
   a.click();
   URL.revokeObjectURL(url);
-}
-
-function mimimi(){
-  console.log("mimi");
 }
