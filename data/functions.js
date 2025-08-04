@@ -291,7 +291,6 @@ function r(filename, place) {
   localStorage.setItem(filename, JSON.stringify(jsonData, 2, null));
   return a;
 }
-
 function exportLocalStorage(filename, place) {
   const data = localStorage.getItem(filename) || '{"array":[]}';
   
@@ -303,4 +302,8 @@ function exportLocalStorage(filename, place) {
   a.download = place;
   a.click();
   URL.revokeObjectURL(url);
+}
+
+function mimimi(){
+  console.log("mimi");
 }
