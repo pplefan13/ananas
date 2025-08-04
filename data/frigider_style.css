@@ -1,0 +1,138 @@
+h1{
+    font-family: cursive;
+    color:rgb(36, 22, 0);
+    font-size:39px;
+}
+body{
+    background-color: rgb(86, 50, 17);
+}
+ul{
+    list-style-type: none;
+    padding-left: 0%;
+}
+label{
+    font-size: 30px;
+}
+input{
+    background-color: rgb(36, 22, 0);
+    border: 2px solid rgb(86, 50, 17);
+    border-radius: px;
+    width: 208px;
+    height: 39px;
+}
+input:focus{
+    background-color: rgb(190, 136, 0);
+    border:3 px solid rgb(86, 50, 17)
+}
+input[type="checkbox"]{
+    height:26px;
+    width:26px;
+    appearance: none;
+    border: none;
+    border-radius: 7px;
+}
+input[type="checkbox"]:checked{
+    background-image: url('emoji.png');
+    background-repeat: no-repeat;
+}
+
+p{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+    font-family: cursive;
+    font-size: 30px;
+    color:rgb(21, 14, 3);
+}
+
+.home_button{
+    background-color: rgb(225, 194, 20);
+    border-radius: 13px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: cursive;
+    color: rgb(86, 50, 17);
+    text-align: center;
+    font-size: 26px;
+}
+
+.home_button:hover{
+    background-color: gold;
+}
+
+.add_button{
+    background-color: rgb(37, 21, 0);
+    border-radius: 13px;
+    width:26px;
+    height:39px;
+    position:relative;
+    left:1300px;
+    border-color: rgb(87, 60, 34);
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(87, 60, 34);
+    text-align: center;
+    font-size: 26px;
+}
+.add_button:hover{
+    background-color: rgb(170, 124, 76);
+}
+
+.ananas_button{
+    background-color: rgb(37, 21, 0);
+    border-radius: 13px;
+    position:relative;
+    width:88px;
+    height:39px;
+    left:1300px;
+    border-color: rgb(87, 60, 34);
+    font-family: cursive;
+    color: rgb(87, 60, 34);
+    text-align: center;
+    font-size: 26px;
+}
+.ananas_button:hover{
+    background-color: gold;
+}
+.done_button{
+    background-color: rgb(37, 21, 0);
+    border-radius: 13px;
+    position:relative;
+    width: 102px;
+    transform: translateX(-50%, -50%);
+    border-color: rgb(87, 60, 34);
+    font-family: cursive;
+    color: rgb(87, 60, 34);
+    text-align: center;
+    font-size: 26px;
+}
+.done_button:hover{
+    background-color: rgb(170, 124, 76); 
+}
+
+.kretes_button{
+    background-color: rgb(37, 21, 0);
+    border-radius: 13px;
+    position:relative;
+    width:150px;
+    height:75px;
+    left:1300px;
+    border-color: rgb(87, 60, 34);
+    font-family: cursive;
+    color: rgb(87, 60, 34);
+    text-align: center;
+    font-size: 13px;
+}
+.kretes_button:hover{
+    background-color: rgb(182,182,182);
+    color: rgb(0, 66, 122);
+    border-color: black;
+}
+
+.row {
+  display: flex;
+}
+.column {
+  flex: 50%;
+}

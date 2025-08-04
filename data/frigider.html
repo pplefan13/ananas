@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<title>Frigiderul meu</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico?v=2">
+<link rel="stylesheet" href="frigider_style.css">
+<body>
+<h1><marquee behavior="scroll" direction="right">Frigiderul meu<br>
+<img src="line_orange.png" width="215" height="23"></marquee></h1>
+
+<body>
+
+
+<button class="add_button" onclick="add_input_box()">+</button>
+<button class="add_button" onclick="show_checklist(food)">-</button>
+<button class="ananas_button" onclick="ananas(food)">ananas</button>
+<button class="kretes_button" id="mi" onclick="exportLocalStorage('names.json', 'nexport.json'), 
+exportLocalStorage('dates.json', 'dexport.json')">Kretes, ia cutia din acest<br> 
+ teleporter si diesel se porneste,<br> simplu si genial fratilor</button>
+<br><br><br>
+
+<div class="row">
+  <div class="column"><p style="font-weight: bold; font-size: 39;">Alimente</p></div>
+  <div class="column"><p style="font-weight: bold; font-size: 39;">Zile ramase pana la expirare</p></div>
+</div>
+<br>
+
+<div class="row">
+  <div class="column"><p id="c1"></p></div>
+  <div class="column"><p id="c2"></p></div>
+</div> 
+<script src="functions.js"></script>
+<p id="demo"></p><br><br>
+<p id="button"></p>
+
+<button class="home_button" onclick="gotohome()">Iesi din frigider</button>
+</body>
+</html>
