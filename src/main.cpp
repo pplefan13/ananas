@@ -26,7 +26,7 @@ void setup() {
         return;
     }
 
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+  /*server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(LittleFS, "/ananasite.html", "text/html");});
 
   server.on("/ananasite.html", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -55,7 +55,7 @@ void setup() {
   
   server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(LittleFS, "/favicon.ico", "image/x-icon");});  
-
+*/
   //opening files and checking they alright
   File name=LittleFS.open("n.txt", "r");
   File date=LittleFS.open("d.txt", "r");
@@ -110,7 +110,7 @@ void setup() {
 
   name.close();
   date.close();
-  server.begin();
+  //server.begin();
 }
 
 
