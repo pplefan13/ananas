@@ -1,5 +1,4 @@
 
-
 let names=localStorage.getItem('names.json');
 let dates=localStorage.getItem('dates.json');
 
@@ -13,8 +12,8 @@ if(!data.names)
 if(!data.dates)
   data.dates=[];
 
-let x=return_array(data.names.array, "c1");
-let y=return_array(data.dates.array, "c2");
+let x=return_array(data.names, "c1");
+let y=return_array(data.dates, "c2");
 
 let food={name: x, date: y};
 
