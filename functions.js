@@ -202,12 +202,15 @@ function ylen(y){
 function f(filename, newContent, place) {
 
   let existingData=localStorage.getItem(filename);
-  let jsonData = {array: []};
+  let jsonData={array: []};
+  console.log("jsonData");
+  console.log(jsonData);
   
-  jsonData=JSON.parse(existingData);
+  jsonData.array=JSON.parse(existingData);
 
   if (!jsonData.array) {
-    jsonData.array = [];}
+    jsonData.array = [];
+  }
    
   if(newContent!=null){
     jsonData.array.push(newContent);}
