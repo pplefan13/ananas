@@ -11,6 +11,7 @@ if(!data.names)
   data.names=[];
 if(!data.dates)
   data.dates=[];
+console.log(JSON.stringify(data.dates[0]));
 
 let x=return_array(data.names, "c1");
 let y=return_array(data.dates, "c2");
