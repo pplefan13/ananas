@@ -1,4 +1,4 @@
-console.log("mi2");
+console.log("mi3");
 let names=localStorage.getItem('names.json');
 let dates=localStorage.getItem('dates.json');
 
