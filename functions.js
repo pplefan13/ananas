@@ -1,4 +1,4 @@
-
+console.log("mi");
 let names=localStorage.getItem('names.json');
 let dates=localStorage.getItem('dates.json');
 
@@ -11,7 +11,7 @@ if(!data.names)
   data.names=[];
 if(!data.dates)
   data.dates=[];
-console.log("mi");
+
 console.log(data.dates[0]);
 
 let x=return_array(data.names, "c1");
