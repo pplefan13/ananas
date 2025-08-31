@@ -1,18 +1,20 @@
-console.log("mi3");
+
 let names=localStorage.getItem('names.json');
 let dates=localStorage.getItem('dates.json');
+
+console.log(typeof(JSON.stringify(names)));
 
 let data={names:[], dates:[]};
   
 data.names=JSON.parse(names);
 data.dates=JSON.parse(dates);
-//data.exps=JSON.parse(exp);
+
 if(!data.names)
   data.names=[];
 if(!data.dates)
   data.dates=[];
 
-console.log(data.dates);
+//console.log(data.dates);
 
 let x=return_array(data.names, "c1");
 let y=return_array(data.dates, "c2");
@@ -48,6 +50,7 @@ function add_input_box(){
 }
 
 function ananas(obj){
+  localStorage.setItem('mi', 'mananas, ananas')
   let new_name=f('names.json', "ananas", "c1");
   let new_date=f('dates.json', "niciodata", "c2");
   obj.name=new_name;
@@ -202,17 +205,16 @@ function ylen(y){
 function f(filename, newContent, place) {
 
   let existingData=localStorage.getItem(filename);
-  let jsonData={array: []};
-  console.log("jsonData");
-  console.log(jsonData);
-  
-  jsonData.array=JSON.parse(existingData);
+  let jsonData={array:[]};
+
+  if(existingData)
+    jsonData.array=JSON.parse(existingData);
 
   if (!jsonData.array) {
-    jsonData.array = [];
+    jsonData.array=[];
   }
    
-  if(newContent!=null){
+  if(newContent!=null|| newContent){
     jsonData.array.push(newContent);}
 
   let y=jsonData.array;
@@ -227,7 +229,9 @@ function f(filename, newContent, place) {
 
   safe_display(ca, place, 100);
   
-  localStorage.setItem(filename, JSON.stringify(jsonData, 2, null));
+  console.log(JSON.stringify(jsonData, 2, null))
+
+  localStorage.setItem(filename, JSON.stringify(jsonData.array, 2, null));
   return a;
 }
 
