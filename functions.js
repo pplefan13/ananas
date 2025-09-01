@@ -1,4 +1,3 @@
-
 let names=localStorage.getItem('names.json');
 let dates=localStorage.getItem('dates.json');
 
@@ -13,8 +12,6 @@ if(!data.names)
   data.names=[];
 if(!data.dates)
   data.dates=[];
-
-//console.log(data.dates);
 
 let x=return_array(data.names, "c1");
 let y=return_array(data.dates, "c2");
@@ -31,11 +28,6 @@ function gotohome(){
 function display(list, place){
   document.getElementById(place).innerHTML =list;}
 
-function reset(){
-  r('names.json', "c1");
-  r('dates.json', "c2");
-}
-
 function add_input_box(){
   let input='<form id="fml">';
   input+='<label for="fname">Nume aliment: </label>';
@@ -50,7 +42,6 @@ function add_input_box(){
 }
 
 function ananas(obj){
-  localStorage.setItem('mi', 'mananas, ananas')
   let new_name=f('names.json', "ananas", "c1");
   let new_date=f('dates.json', "niciodata", "c2");
   obj.name=new_name;
@@ -87,7 +78,9 @@ function remove(obj){
       i--;
     }
   }
-    reset();
+
+  localStorage.setItem('names.json', '')
+  localStorage.setItem('dates.json', '')
 
   for(let i=0; i<obj.name.length; i++){
     f('names.json', obj.name[i], "c1");
@@ -223,13 +216,11 @@ function f(filename, newContent, place) {
   let a=make(x);
   let ca=a; 
   
-  for(let i=0; i<a.length; i++)
-    if(place=='c2'&& newContent!='niciodata')
-      ca[i]=String(exp(ca[i]));
+  for(let i=0; i<a.length; i++){
+    if(place=='c2')
+      ca[i]=String(exp(ca[i]));}
 
   safe_display(ca, place, 100);
-  
-  console.log(JSON.stringify(jsonData, 2, null))
 
   localStorage.setItem(filename, JSON.stringify(jsonData.array, 2, null));
   return a;
@@ -290,23 +281,6 @@ function array_exp(array){
   return a;
 }
 
-function r(filename, place) {
-
-  let jsonData = {array: []};
-    
-  if (!jsonData.array || !Array.isArray(jsonData.array)) {
-    jsonData.array = [];}
-
-  let y=jsonData.array;
-  let z=return_array(y, place);
-  let x=JSON.stringify(z);
-  let a=make(x);
-
-  safe_display(a, place, 100);
-  
-  localStorage.setItem(filename, JSON.stringify(jsonData, 2, null));
-  return a;
-}
 function exportLocalStorage(filename, place) {
   const data = localStorage.getItem(filename) || '{"array":[]}';
   
