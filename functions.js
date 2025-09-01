@@ -16,7 +16,7 @@ if(!data.dates)
 let x=return_array(data.names, "c1");
 let y=return_array(data.dates, "c2");
 
-let food={name: x, date: y};}
+let food={name: x, date: y};
 
 
 function gotofrigider(){
@@ -27,6 +27,7 @@ function gotohome(){
 
 function display(list, place){
   document.getElementById(place).innerHTML =list;
+}
 
 function add_input_box(){
   let input='<form id="fml">';
