@@ -1,7 +1,7 @@
+console.log("date_problem loaded");
+
 let names=localStorage.getItem('names.json');
 let dates=localStorage.getItem('dates.json');
-
-console.log(typeof(JSON.stringify(names)));
 
 let data={names:[], dates:[]};
   
@@ -97,12 +97,9 @@ function add(obj){
 
   let new_name=f('names.json', name_input, "c1");
   let new_date=f('dates.json', date_input, "c2");
-
-  console.log("date_input ", new_date);
   
   obj.name=new_name;
   obj.date=new_date;
-  console.log("add date", obj.date);
 
   document.getElementById("demo").innerHTML= '';
   document.getElementById("button").innerHTML='';
@@ -222,9 +219,6 @@ function f(filename, newContent, place) {
       ca[i]=String(exp(ca[i]));}
 
   safe_display(ca, place, 100);
-
-  if(place=='c2')
-    console.log("a", a);
 
   localStorage.setItem(filename, JSON.stringify(jsonData.array, 2, null));
   return a;
