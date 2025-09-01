@@ -1,5 +1,3 @@
-console.log("date_problem loaded");
-
 let names=localStorage.getItem('names.json');
 let dates=localStorage.getItem('dates.json');
 
@@ -276,9 +274,8 @@ function make(array){
 function exportLocalStorage(filename, place) {
   const data = localStorage.getItem(filename) || '{"array":[]}';
   
-  const blob = new Blob([data], { type: 'application/json' });
+  const blob = new Blob([data], {type: 'text/plain'});
   const url = URL.createObjectURL(blob);
-  
   const a = document.createElement('a');
   a.href = url;
   a.download = place;
