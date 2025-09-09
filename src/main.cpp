@@ -1,14 +1,4 @@
-#include <iostream>
-#include <string.h>
-#include "blink/libraries"
-#include "ota/ota.h"
-#include "dis/dimensions"
-#include <FS.h>
-#include <LittleFS.h>
-#include <ESP8266WiFi.h>
-#include <ESPAsyncTCP.h>
-#include <ESPAsyncWebServer.h>
-#include <ArduinoJson.h>
+#include "main_headers.h"
 
 AsyncWebServer server(80);
 int ncounter=0, nindex=0;
@@ -17,76 +7,109 @@ char x[100][15]={0};
 char y[100][10]={0};
 
 void setup() {
+
   Serial.begin(115200);
   display_setup(); 
-  ota_setup();
+  //ota_setup();
+  if(LittleFS.begin()){
+    LittleFS.mkdir("/src/mi");
+  }
+  else{
+    display.clearDisplay();
+    display.print("littlefs not mounted");
+    display.display();
+  }
 
-  if(!LittleFS.begin()) {  // Add this check
-        Serial.print("LittleFS Mount Failed");
-        return;
-    }
+  mdisplay(2, 0, 0);
 
-  /*server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/ananasite.html", "text/html");});
+  /*strcpy(n, x.c_str());
 
-  server.on("/ananasite.html", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/ananasite.html", "text/html");});
-
-  server.on("/frigider.html", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/frigider.html", "text/html");});
-
-  server.on("/home_style.css", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/home_style.css", "text/css");});
-
-  server.on("/frigider_style.css", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/frigider_style.css", "text/css");});
-  
-  server.on("/functions.js", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/functions.js", "application/javascript");});
-  
-  server.on("/line.png", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/line.png", "image/png");});  
-  
-  server.on("/line_orange.png", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/line_orange.png", "image/png");}); 
-  
-  server.on("/emoji.png", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/emoji.png", "image/png");});  
-  
-  server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/favicon.ico", "image/x-icon");});  
-*/
-  //opening files and checking they alright
-  File name=LittleFS.open("n.txt", "r");
-  File date=LittleFS.open("d.txt", "r");
-  
+  int cn_index=0, cd_index=0;
   display.clearDisplay();
-  if (!name) {
-    mdisplay("no name   muchacho", 2, 0, 32);
+  if (name.is_open()) {
+    //name>>n;
+    //strcat(n, "\0");
+    mdisplay(2, 0, 32);
+    display.print("we got a name");
+    display.display();
+    
+    delay(1000);
+    display.clearDisplay();
+    
+    mdisplay(3, 0, 0);
+    display.print(n[0]);
+    display.display();
+    }
+    //remove("n.txt");
+  else{
+    mdisplay(2, 0, 32);
+    display.print("no name   muchacho");
+    display.display();
     return;
+  }*/
+  /*else{
+
   }
+  display.clearDisplay();
   if(!date){
-    mdisplay("no date   muchacho", 2, 64, 32);
+    mdisplay_String("no date   muchacho", 2, 64, 32);
     return;
   }
-  
-  String n=name.readString();
-  String d=date.readString();
-
-  for(int i=0; i<n.length(); i++){
-    if(n[i]=='[' || n[i]==']' || n[i]=='"'){
-      n.remove(i, 1);
-      i--;
+  else{
+    
+    fgets(d, 2000, date);
+    strcat(d, "\0");
+    //remove("d.txt");
+    if(d){
+      mdisplay_String("date array:", 2, 0, 0);
+      delay(1000);
+      display.clearDisplay();
+      mdisplay(d, 2, 0, 0);
     }
-    if(d[i]=='[' || d[i]==']' || d[i]=='"'){
-      d.remove(i, 1);
+  }
+
+  int j=2; //the beginning [" is automatically skipped
+
+  do{
+    if(n[j]!='"'){
+      cn[cn_index]=n[j];
+      cn_index++;
+      j++;
+    }
+    else
+      j++;
+  }while(n[j]!=']');
+
+  j=2;
+  do{
+    if(d[j]!='"'){
+      cd[cd_index]=n[j];
+      cd_index++;
+      j++;
+    }
+    else
+      j++;
+  }while(d[j]!=']');
+
+  /*for(size_t i=0; i<strlen(n); i++){
+    if(n[i]!='[' && n[i]!=']' && n[i]!='"'){
+      //n.remove(i, 1);
+      strcat(cn, n[i]);
       i--;
     }
   }
 
-  for(int i=0; i<n.length(); i++){
+  for(size_t i=0; i<strlen(d); i++){
+    if(d[i]!='[' && d[i]!=']' && d[i]!='"'){
+      //d.remove(i, 1);
+      strcat(cd, d[i]);
+      i--;
+    }
+  }
+
+  for(size_t i=0; i<strlen(cn); i++){
     if(n[i]!=','){
-      x[nindex][ncounter]=n[i];
+      x[nindex][ncounter]=cn[i];
       ncounter++;
     }
     else{
@@ -96,9 +119,9 @@ void setup() {
     }
   }
 
-  for(int i=0; i<d.length(); i++){
+  for(size_t i=0; i<strlen(cd); i++){
     if(d[i]!=','){
-      y[dindex][dcounter]=d[i];
+      y[dindex][dcounter]=cd[i];
       dcounter++;
     }
     else{
@@ -106,10 +129,9 @@ void setup() {
       dindex++;
       dcounter=0;
     }
-  }
-
-  name.close();
-  date.close();
+  }*/
+  //name.close();
+  //fclose(date);
   //server.begin();
 }
 
@@ -120,12 +142,19 @@ void loop() {
   int pos=0;
   display.clearDisplay();
   for(int ind=0; ind<=nindex; ind++){
-    for(int j=0; j<strlen(x[ind]); j++)
-        mdisplay(String(x[ind][j]), 1, 6*j, pos);
+    for(int j=0; j<strlen(x[ind]); j++){
+        mdisplay(1, 6*j, pos);
+        display.print(String(x[ind][j]));
+        display.display();
+    }
+
     delay(500);
 
-    for(int j=0; j<strlen(y[ind]); j++)
-        mdisplay(String(y[ind][j]), 1, 5*j+80, pos);
+    for(int j=0; j<strlen(y[ind]); j++){
+        mdisplay(1, 5*j+80, pos);
+        display.print(String(x[ind][j]));
+        display.display();
+    }
     
     pos+=10;
 

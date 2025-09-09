@@ -281,10 +281,8 @@ void buton2off(void) {
   delay(500);
 }
 
-void mdisplay(String s ,int size, int x, int y){
+void mdisplay(int size, int x, int y){
   display.setTextSize(size);
   display.setTextColor(SSD1306_WHITE);
   display.setCursor(x, y);
-  display.print(s);
-  display.display();
 }
