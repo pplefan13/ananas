@@ -1,4 +1,4 @@
-console.log("file_problem loaded");
+console.log("file_problem load");
 
 let names=localStorage.getItem('names.json');
 let dates=localStorage.getItem('dates.json');
