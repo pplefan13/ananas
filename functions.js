@@ -1,4 +1,4 @@
-console.log("problem");
+console.log("p");
 
 let names=localStorage.getItem('names.json');
 let dates=localStorage.getItem('dates.json');
@@ -197,7 +197,6 @@ function ylen(y){
 function f(filename, newContent, place) {
 
   let existingData=localStorage.getItem(filename);
-  let expData=localStorage.getItem('expirate.json');
   let jsonData={array:[]};
   let jsonExp={array:[]};
 
@@ -223,7 +222,6 @@ function f(filename, newContent, place) {
   
   for(let i=0; i<a.length; i++){
     if(place=='c2'){
-      let exp_date=String((-1)*exp(ca[i]));
       if(exp(ca[i])<0)
         ca[i]=text_exp(exp(ca[i]));
       else
