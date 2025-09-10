@@ -218,7 +218,7 @@ function f(filename, newContent, place) {
   
   for(let i=0; i<a.length; i++){
     if(place=='c2'){
-      let exp_date=String(exp(ca[i]));
+      let exp_date=String((-1)*exp(ca[i]));
       if(exp(ca[i])<0){
         ca[i]=ex_text.concat(exp_date);}
       else
