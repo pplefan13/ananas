@@ -1,4 +1,4 @@
-console.log("p");
+console.log("prob");
 
 let names=localStorage.getItem('names.json');
 let dates=localStorage.getItem('dates.json');
@@ -199,11 +199,6 @@ function f(filename, newContent, place) {
   let existingData=localStorage.getItem(filename);
   let jsonData={array:[]};
   let jsonExp={array:[]};
-
-  if(expData)
-    jsonExp.array=JSON.parse(expData);
-  if(!jsonExp.array)
-    jsonExp.array=[];
 
   if(existingData)
     jsonData.array=JSON.parse(existingData);
