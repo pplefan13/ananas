@@ -1,4 +1,4 @@
-console.log("date_problem loaded");
+console.log("file_problem loaded");
 
 let names=localStorage.getItem('names.json');
 let dates=localStorage.getItem('dates.json');
@@ -214,10 +214,17 @@ function f(filename, newContent, place) {
   let x=JSON.stringify(z);
   let a=make(x);
   let ca=make(x);
+  let ex_text='exp de ';
   
   for(let i=0; i<a.length; i++){
-    if(place=='c2')
-      ca[i]=String(exp(ca[i]));}
+    if(place=='c2'){
+      let exp_date=String(exp(ca[i]));
+      if(exp(ca[i])<0){
+        ca[i]=ex_text.concat(exp_date);}
+      else
+        ca[i]=String(exp(ca[i]));
+      }
+    }
 
   safe_display(ca, place, 100);
 
