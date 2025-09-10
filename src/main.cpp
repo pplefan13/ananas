@@ -1,88 +1,34 @@
-#include <iostream>
-#include <string.h>
-#include "blink/libraries"
-#include "ota/ota.h"
-#include "dis/dimensions"
-#include <FS.h>
-#include <LittleFS.h>
-#include <ESP8266WiFi.h>
-#include <ESPAsyncTCP.h>
-#include <ESPAsyncWebServer.h>
-#include <ArduinoJson.h>
+#include "main_lib.h"
 
-AsyncWebServer server(80);
-int ncounter=0, nindex=0;
-int dcounter=0, dindex=0;
-char x[100][15]={0};
-char y[100][10]={0};
 
 void setup() {
   Serial.begin(115200);
   display_setup(); 
   ota_setup();
 
-  if(!LittleFS.begin()) {  // Add this check
-        Serial.print("LittleFS Mount Failed");
-        return;
-    }
-
-  /*server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/ananasite.html", "text/html");});
-
-  server.on("/ananasite.html", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/ananasite.html", "text/html");});
-
-  server.on("/frigider.html", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/frigider.html", "text/html");});
-
-  server.on("/home_style.css", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/home_style.css", "text/css");});
-
-  server.on("/frigider_style.css", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/frigider_style.css", "text/css");});
-  
-  server.on("/functions.js", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/functions.js", "application/javascript");});
-  
-  server.on("/line.png", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/line.png", "image/png");});  
-  
-  server.on("/line_orange.png", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/line_orange.png", "image/png");}); 
-  
-  server.on("/emoji.png", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/emoji.png", "image/png");});  
-  
-  server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(LittleFS, "/favicon.ico", "image/x-icon");});  
-*/
+  if(!LittleFS.begin()) {
+    display.clearDisplay();
+    mdisplay("LittleFS Mount Failed", 1, 0, 0);
+    return;
+  } else{
+    display.clearDisplay();
+    mdisplay("LittleFS Mounted", 1, 0, 0);
+  }
+  delay(1000);
   //opening files and checking they alright
   File name=LittleFS.open("n.txt", "r");
   File date=LittleFS.open("d.txt", "r");
   
   display.clearDisplay();
-  if (!name) {
-    mdisplay("no name   muchacho", 2, 0, 32);
-    return;
-  }
-  if(!date){
-    mdisplay("no date   muchacho", 2, 64, 32);
-    return;
-  }
+  file_checking(name, date);
+
+  delay(1000);
   
   String n=name.readString();
   String d=date.readString();
 
-  for(int i=0; i<n.length(); i++){
-    if(n[i]=='[' || n[i]==']' || n[i]=='"'){
-      n.remove(i, 1);
-      i--;
-    }
-    if(d[i]=='[' || d[i]==']' || d[i]=='"'){
-      d.remove(i, 1);
-      i--;
-    }
-  }
+  string_handling(n);
+  string_handling(d);
 
   for(int i=0; i<n.length(); i++){
     if(n[i]!=','){
