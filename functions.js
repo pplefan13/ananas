@@ -1,4 +1,4 @@
-console.log("exp_problem");
+console.log("problem");
 
 let names=localStorage.getItem('names.json');
 let dates=localStorage.getItem('dates.json');
@@ -220,24 +220,22 @@ function f(filename, newContent, place) {
   let x=JSON.stringify(z);
   let a=make(x);
   let ca=make(x);
-  let cca=make(x);
-  let ex_text='exp de ';
   
   for(let i=0; i<a.length; i++){
     if(place=='c2'){
       let exp_date=String((-1)*exp(ca[i]));
       if(exp(ca[i])<0)
-        ca[i]=ex_text.concat(exp_date);
+        ca[i]=text_exp(exp(ca[i]));
       else
         ca[i]=String(exp(ca[i]));
 
-      cca[i]=String(exp(ca[i]));
+      jsonExp.array.push(String(exp (ca[i])));
       }
     }
 
   safe_display(ca, place, 100);
 
-  localStorage.setItem('expirate.json', JSON.stringify(cca, 2, null));
+  localStorage.setItem('expirate.json', JSON.stringify(jsonExp.array, 2, null));
   localStorage.setItem(filename, JSON.stringify(jsonData.array, 2, null));
   return a;
 }
@@ -301,4 +299,10 @@ function exportLocalStorage(filename, place) {
   a.download = place;
   a.click();
   URL.revokeObjectURL(url);
+}
+
+function text_exp(x){
+  let ex_text='acum ';
+  let result=ex_text.concat(String(-x), ' zile');
+  return result;
 }
