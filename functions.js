@@ -1,4 +1,4 @@
-console.log("file_problem l");
+console.log("exp_problem");
 
 let names=localStorage.getItem('names.json');
 let dates=localStorage.getItem('dates.json');
@@ -197,15 +197,21 @@ function ylen(y){
 function f(filename, newContent, place) {
 
   let existingData=localStorage.getItem(filename);
+  let expData=localStorage.getItem('expirate.json');
   let jsonData={array:[]};
+  let jsonExp={array:[]};
+
+  if(expData)
+    jsonExp.array=JSON.parse(expData);
+  if(!jsonExp.array)
+    jsonExp.array=[];
 
   if(existingData)
     jsonData.array=JSON.parse(existingData);
 
-  if (!jsonData.array) {
+  if (!jsonData.array)
     jsonData.array=[];
-  }
-   
+
   if(newContent!=null|| newContent){
     jsonData.array.push(newContent);}
 
@@ -214,20 +220,24 @@ function f(filename, newContent, place) {
   let x=JSON.stringify(z);
   let a=make(x);
   let ca=make(x);
+  let cca=make(x);
   let ex_text='exp de ';
   
   for(let i=0; i<a.length; i++){
     if(place=='c2'){
       let exp_date=String((-1)*exp(ca[i]));
-      if(exp(ca[i])<0){
-        ca[i]=ex_text.concat(exp_date);}
+      if(exp(ca[i])<0)
+        ca[i]=ex_text.concat(exp_date);
       else
         ca[i]=String(exp(ca[i]));
+
+      cca[i]=String(exp(ca[i]));
       }
     }
 
   safe_display(ca, place, 100);
 
+  localStorage.setItem('expirate.json', JSON.stringify(cca, 2, null));
   localStorage.setItem(filename, JSON.stringify(jsonData.array, 2, null));
   return a;
 }
