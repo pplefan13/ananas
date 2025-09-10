@@ -10,8 +10,4 @@
 #include <ArduinoJson.h>
 #include "file_handling.h"
 
-int ncounter=0, nindex=0;
-int dcounter=0, dindex=0;
-char x[100][15]={0};
-char y[100][10]={0};
 

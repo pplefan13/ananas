@@ -1,5 +1,8 @@
 #include "main_lib.h"
-
+int ncounter=0, nindex=0;
+int dcounter=0, dindex=0;
+char x[100][15]={0};
+char y[100][15]={0};
 
 void setup() {
   Serial.begin(115200);
@@ -15,14 +18,12 @@ void setup() {
     mdisplay("LittleFS Mounted", 1, 0, 0);
   }
   delay(1000);
+
   //opening files and checking they alright
   File name=LittleFS.open("n.txt", "r");
   File date=LittleFS.open("d.txt", "r");
-  
-  display.clearDisplay();
-  file_checking(name, date);
 
-  delay(1000);
+  file_checking(name, date);
   
   String n=name.readString();
   String d=date.readString();
@@ -30,33 +31,11 @@ void setup() {
   string_handling(n);
   string_handling(d);
 
-  for(int i=0; i<n.length(); i++){
-    if(n[i]!=','){
-      x[nindex][ncounter]=n[i];
-      ncounter++;
-    }
-    else{
-      x[nindex][ncounter]='\0';
-      nindex++;
-      ncounter=0;
-    }
-  }
-
-  for(int i=0; i<d.length(); i++){
-    if(d[i]!=','){
-      y[dindex][dcounter]=d[i];
-      dcounter++;
-    }
-    else{
-      y[dindex][dcounter]='\0';
-      dindex++;
-      dcounter=0;
-    }
-  }
+  array_handling(n, x, nindex, ncounter);
+  array_handling(d, y, dindex, dcounter);
 
   name.close();
   date.close();
-  //server.begin();
 }
 
 
@@ -68,6 +47,7 @@ void loop() {
   for(int ind=0; ind<=nindex; ind++){
     for(int j=0; j<strlen(x[ind]); j++)
         mdisplay(String(x[ind][j]), 1, 6*j, pos);
+    
     delay(500);
 
     for(int j=0; j<strlen(y[ind]); j++)
@@ -80,8 +60,8 @@ void loop() {
       delay(1000);
       display.clearDisplay();}
     
-    delay(100);}
-
+    delay(100);
+  }
 }
 
 
