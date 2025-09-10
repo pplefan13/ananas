@@ -1,4 +1,4 @@
-console.log("prob");
+console.log("problems");
 
 let names=localStorage.getItem('names.json');
 let dates=localStorage.getItem('dates.json');
@@ -217,12 +217,11 @@ function f(filename, newContent, place) {
   
   for(let i=0; i<a.length; i++){
     if(place=='c2'){
+      jsonExp.array.push(String(exp (ca[i])));
       if(exp(ca[i])<0)
         ca[i]=text_exp(exp(ca[i]));
       else
         ca[i]=String(exp(ca[i]));
-
-      jsonExp.array.push(String(exp (ca[i])));
       }
     }
 
