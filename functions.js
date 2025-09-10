@@ -1,4 +1,4 @@
-console.log("problems");
+console.log("p");
 
 let names=localStorage.getItem('names.json');
 let dates=localStorage.getItem('dates.json');
