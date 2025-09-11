@@ -20,7 +20,7 @@ void string_handling(String &s){
   }
 }
 
-void array_handling(String &s, char a[100][15], int index, int counter){
+int array_handling(String &s, char a[100][15], int index, int counter){
   for(int i=0; i<s.length(); i++){
     if(s[i]!=','){
       a[index][counter]=s[i];
@@ -32,4 +32,5 @@ void array_handling(String &s, char a[100][15], int index, int counter){
       counter=0;
     }
   }
+  return index;
 }

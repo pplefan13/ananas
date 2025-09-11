@@ -1,6 +1,7 @@
 #include <iostream>
-#include <string.h>
+#include <string>
 #include "blink/libraries"
+#include <bits/stdc++.h>
 #include "ota/ota.h"
 #include "dis/used_headers.h"
 #include <FS.h>
