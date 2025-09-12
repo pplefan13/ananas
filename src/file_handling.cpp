@@ -1,14 +1,18 @@
 #include "file_handling.h"
 
-void file_checking(File &name, File &date){
+int file_checking(File &name, File &date){
   if(!name){
     display.clearDisplay();
     mdisplay("no name   muchacho", 2, 0, 32);
+    return 1;
   }
   if(!date){
+    display.clearDisplay();
     mdisplay("no date   muchacho", 2, 64, 32);
+    return 1;
   }
   delay(1000);
+  return 0;
 }
 
 void string_handling(String &s){

@@ -20,7 +20,10 @@ void setup() {
   File name=LittleFS.open("n.txt", "r");
   File date=LittleFS.open("e.txt", "r");
 
-  file_checking(name, date);
+  if(!file_checking(name, date)){
+    LittleFS.remove("n.txt");
+    LittleFS.remove("e.txt");
+  }
   
   String n=name.readString();
   String d=date.readString();

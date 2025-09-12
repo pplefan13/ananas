@@ -10,5 +10,7 @@
 #include <ESPAsyncTCP.h>
 #include <ArduinoJson.h>
 #include "file_handling.h"
+#include <stdio.h>
+#include <SD.h>
 
 
